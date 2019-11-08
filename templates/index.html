@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title> TODO Tasks</title>
+{% endblock%}
+
+
+{% block body %}
+<div class="content" margin="0 auto">
+    <h1>TODO LIST</h1>
+
+    <table border-collapse="collapse" border=1px solid #aaa;>
+        <tr>
+            <th>Task</th>
+            <th>Email</th>
+            <th>Priority</th>
+            <th>Action</th>
+        </tr>
+        {% for item in items %}
+        <tr>
+            <td>{{item.task_name}}</td>
+            <td>{{item.email}}</td>
+            <td>{{item.priority}}</td>
+            <td>
+                <a href="/delete/{{item.id}}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <br>
+    <br>
+    <form action="/submit" method="POST">
+        <input type="text" name="task" id="name" placeholder="Task name">
+        <input type="text" name="email" id="email" placeholder="email">
+        <select name="priority" id="priority">
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+        </select>
+        <input type="submit" value="Add To Do Item">
+        <button type="submit" form="form1" value="Clear">Clear</button>
+        <button type="submit" form="form2" value="Save">Save</button>
+    </form>
+
+    <form action="/clear" method="POST" id="form1">
+    </form>
+
+    <form action="/save" method="POST" id="form2">
+    </form>
+</div>
+{% endblock %}
